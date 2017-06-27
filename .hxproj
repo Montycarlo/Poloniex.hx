@@ -1,0 +1,32 @@
+{
+  "_path": "HaxePoloniex",
+  "_filename": ".hxproj",
+  "common": {
+    "name": "HaxePoloniex",
+    "sources": [
+      "src"
+    ],
+    "flags": [],
+    "prepend": null,
+    "prependFile": null,
+    "resources": {},
+    "libraries_haxe": {},
+    "libraries_reg": {}
+  },
+  "solutions": {
+    "HaxePoloniex": {
+      "target": "haxe",
+      "out_dir": "bin",
+      "out_bin": "HaxePoloniex",
+      "main": "Main",
+      "name": null,
+      "sources": [],
+      "flags": [],
+      "prepend": null,
+      "prependFile": null,
+      "resources": {},
+      "libraries_haxe": {},
+      "libraries_reg": {}
+    }
+  }
+}
