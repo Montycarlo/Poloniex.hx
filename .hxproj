@@ -1,5 +1,5 @@
 {
-  "_path": "HaxePoloniex",
+  "_path": "/home/jb/dev/HaxePoloniex",
   "_filename": ".hxproj",
   "common": {
     "name": "HaxePoloniex",
@@ -10,12 +10,15 @@
     "prepend": null,
     "prependFile": null,
     "resources": {},
-    "libraries_haxe": {},
+    "libraries_haxe": {
+      "tink_core": "*",
+      "tink_await": "*"
+    },
     "libraries_reg": {}
   },
   "solutions": {
     "HaxePoloniex": {
-      "target": "haxe",
+      "target": "cpp",
       "out_dir": "bin",
       "out_bin": "HaxePoloniex",
       "main": "Main",
