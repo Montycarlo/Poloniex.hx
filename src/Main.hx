@@ -5,7 +5,7 @@ using tink.CoreApi;
 
 @:final class Main{
 
-	@async public static function main():Void{
+	public static function main():Void{
 
     var api = new PoloniexAPI();
 
@@ -19,6 +19,23 @@ using tink.CoreApi;
       }
     });
 
+    api.return24Volume().handle(function(t){
+      switch(t){
+        case Success(s):
+          trace('Total BTC Traded: ${s.totalBTC}!');
+        case Failure(f):
+          trace("Failed :(");
+      }
+    });
+
+    api.returnCurrencies().handle(function(t){
+      switch(t){
+        case Success(s):
+          trace(s.get("BTC").name);
+        case Failure(f):
+          trace("Failed :(");
+      }
+    });
 	}
 
 }

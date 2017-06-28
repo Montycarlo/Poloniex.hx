@@ -40,33 +40,62 @@ using tink.CoreApi;
   }
 
   public function return24Volume():Promise<Volume24h>{
-    // https://poloniex.com/public?command=return24hVolume
-    return new Error(0, "");
+    return this.queryPublic([
+      "command" => VOL_24H
+    ]).next(function(vs){
+      return Success(Volume24h.parse(vs));
+    });
   }
 
-  public function returnOrderBook(depth:Int, currencyPair:String):Promise<Orderbook>{
-    //https://poloniex.com/public?command=returnOrderBook&currencyPair=BTC_NXT&depth=10
-    return new Error(0, "");
+  public function returnOrderBook(currencyPair:String, depth:Int=10):Promise<Orderbook>{
+    return this.queryPublic([
+      "command" => ORDER_BOOK,
+      "currencyPair" => currencyPair,
+      "depth" => '$depth'
+    ]).next(function(vs){
+      return Success(Orderbook.parse(vs));
+    });
   }
 
-  public function returnTradeHistory(currencyPair:String, start:Int, end:Int):Promise<TradeHistory>{
-    // https://poloniex.com/public?command=returnTradeHistory&currencyPair=BTC_NXT&start=1410158341&end=1410499372
-    return new Error(0, "");
+  public function returnTradeHistory(currencyPair:String, start:Int, end:Int):Promise<Array<TradeHistory>>{
+    return this.queryPublic([
+      "command" => TRADE_HISTORY,
+      "currencyPair" => currencyPair,
+      "start" => '$start',
+      "end" => '$end',
+    ]).next(function(vs:Array<Dynamic>){
+      return Success([ for(c in vs) TradeHistory.parse(vs)]);
+    });
   }
 
-  public function returnChartData(currencyPair:String, period:Int, start:Int, end:Int):Promise<ChartData>{
-    //  https://poloniex.com/public?command=returnChartData&currencyPair=BTC_XMR&start=1405699200&end=9999999999&period=14400
-    return new Error(0, "");
+  public function returnChartData(currencyPair:String, period:Int, start:Int, end:Int, period:Int=14400):Promise<Array<ChartData>>{
+    // Valid Range values are 300,900,1800,7200,14400,86400
+    return this.queryPublic([
+      "command" => CHART_DATA,
+      "currencyPair" => currencyPair,
+      "start" => '$start',
+      "end" => '$end',
+      "period" => '$period',
+    ]).next(function(vs:Array<Dynamic>){
+      return Success([ for(c in vs) ChartData.parse(vs)]);
+    });
   }
 
-  public function returnCurrencies():Promise<CurrencyMap>{
-    // https://poloniex.com/public?command=returnCurrencies
-    return new Error(0, "");
+  public function returnCurrencies():Promise<Map<String,Currency>>{
+    return this.queryPublic([
+      "command" => CURRENCIES
+    ]).next(function(vs){
+      return Success([ for(c in Reflect.fields(vs)) c => Currency.parse(c, Reflect.field(vs, c))]);
+    });
   }
 
-  public function returnLoanOrders(currencyPair:String):Promise<LoanOrders>{
-    // https://poloniex.com/public?command=returnLoanOrders&currency=BTC
-    return new Error(0, "");
+  public function returnLoanOrders(currency:String):Promise<LoanOrders>{
+    return this.queryPublic([
+      "command" => LOAN_ORDERS,
+      "currency" => currency
+    ]).next(function(vs){
+      return Success(LoanOrders.parse(vs.offers, vs.demands));
+    });
   }
 
   // TODO: Trading API Methods

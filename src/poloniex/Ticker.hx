@@ -14,7 +14,8 @@ class Ticker{
   public var quoteVolume:String;
   public var lowestAsk:String;
 
-  public function new(currencyPair){
+  public function new(currencyPair:String){
+    this.currencyPair = currencyPair;
   }
 
   public static function parse(currencyPair:String, vs:Dynamic){

@@ -1,5 +1,0 @@
-package poloniex;
-
-class CurrencyMap{
-
-}
