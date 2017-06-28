@@ -1,0 +1,14 @@
+{
+    "name"         : "Poloniex.hx",
+    "url"          : "",
+    "license"      : "MIT",
+    "tags"         : ["cross"],
+    "description"  : "Poloniex API for Haxe",
+    "version"      : "0.1.0",
+    "releasenote"  : "",
+    "classPath"    : "src",
+    "contributors" : ["epidevJosh"],
+    "dependencies" : {
+      "tink_core": "*"
+    }
+}
