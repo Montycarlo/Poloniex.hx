@@ -14,6 +14,9 @@ class Ticker{
   public var quoteVolume:String;
   public var lowestAsk:String;
 
+  public var baseCurrencyCode(get,never):String;
+  public var coreCurrencyCode(get,never):String;
+
   public function new(currencyPair:String){
     this.currencyPair = currencyPair;
   }
@@ -35,6 +38,14 @@ class Ticker{
 
   public function getCoinsInvolved():Array<String>{
     return currencyPair.split("_");
+  }
+
+  public function get_baseCurrencyCode():String{
+    return this.getCoinsInvolved()[0];
+  }
+
+  public function get_coreCurrencyCode():String{
+    return this.getCoinsInvolved()[1];
   }
 
 }
