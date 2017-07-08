@@ -33,4 +33,8 @@ class Ticker{
     return t;
   }
 
+  public function getCoinsInvolved():Array<String>{
+    return currencyPair.split("_");
+  }
+
 }
